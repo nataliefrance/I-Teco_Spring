@@ -9,13 +9,19 @@ import org.springframework.stereotype.Component;
 
 @Slf4j //Добавляет логирование в код
 @Component
+//Создание классов, реализующих BeanFactoryPostProcessor, позволит повлиять на то, каким
+//будет бин еще до его создания
 public class PrintBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        //базовая конструкция для получения в цикле всех beanDefinition
+        // Получение имен BeanDefinition всех бинов, объявленных пользователем
+        // и перебор массива для получения доступа к каждому имени
         for (String beanDefinitionName : beanFactory.getBeanDefinitionNames()) {
+            // Получение BeanDefinition по имени
             BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanDefinitionName);
             System.out.println(beanDefinitionName);
+            // Вывод информации о BeanDefinition
+            System.out.println(beanDefinition.toString());
         }
     }
 }
