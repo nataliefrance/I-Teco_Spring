@@ -15,7 +15,9 @@ public class AccountBankApplication {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AccountBankApplication.class);
         AccountService accountService = applicationContext.getBean(AccountService.class);
+        System.out.println("Personal info class: " + accountService.getPersonalInfoClass());
         AccountInfo accountInfo = accountService.getAccountInfoById(1);
+        System.out.println("Personal info class: " + accountService.getPersonalInfoClass());
         System.out.println(accountInfo);
 
         IObject objectValue = applicationContext.getBean(IObject.class);

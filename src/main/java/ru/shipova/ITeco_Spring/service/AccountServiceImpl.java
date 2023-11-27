@@ -1,5 +1,6 @@
 package ru.shipova.ITeco_Spring.service;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import ru.shipova.ITeco_Spring.model.AccountInfo;
 import ru.shipova.ITeco_Spring.model.BankBook;
@@ -14,7 +15,7 @@ public class AccountServiceImpl implements AccountService{
     private final PersonalInformationService personalInformationService;
     private final Map<String, BankBookService> bankBookServices;
 
-    public AccountServiceImpl(PersonalInformationService personalInformationService,
+    public AccountServiceImpl(@Lazy PersonalInformationService personalInformationService,
                               Map<String, BankBookService> bankBookServices) {
         this.personalInformationService = personalInformationService;
         this.bankBookServices = bankBookServices;
@@ -36,5 +37,11 @@ public class AccountServiceImpl implements AccountService{
             }
         }
         return accountInfo;
+    }
+
+    @Override
+    public String getPersonalInfoClass() {
+        //метод показывает, что меняется в зависимости от @lazy
+        return personalInformationService.getClass().toString();
     }
 }
